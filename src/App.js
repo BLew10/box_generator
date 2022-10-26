@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+
+import React, { useState } from 'react';
 import './App.css';
+import ColorForm from './components/ColorForm';
+import Box from './components/Box';
+import DeleteForm from './components/DeleteForm';
 
 function App() {
+
+  const [boxes, setNewBox] = useState([])
+
+  const addBoxColor = (color) => {
+    setNewBox([...boxes,color])
+  }
+  const deleteBox = () => {
+    boxes.pop()
+    setNewBox([...boxes])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ColorForm newColor={addBoxColor}/> 
+      <DeleteForm deleteBox = {deleteBox}/>
+      <Box boxes={boxes}/>
     </div>
   );
 }
